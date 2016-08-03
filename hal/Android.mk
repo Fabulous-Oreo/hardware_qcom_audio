@@ -1,3 +1,4 @@
+
 ifeq ($(strip $(BOARD_USES_ALSA_AUDIO)),true)
 
 LOCAL_PATH := $(call my-dir)
@@ -165,6 +166,11 @@ ifeq ($(strip $(AUDIO_FEATURE_ENABLED_SND_MONITOR)), true)
 endif
 
 LOCAL_HEADER_LIBRARIES += libhardware_headers
+
+ifeq ($(strip $(AUDIO_FEATURE_ENABLED_HWDEP_CAL)),true)
+  LOCAL_CFLAGS += -DHWDEP_CAL_ENABLED
+  LOCAL_SRC_FILES += audio_extn/hwdep_cal.c
+endif
 
 LOCAL_MODULE := audio.primary.$(TARGET_BOARD_PLATFORM)
 
